@@ -10,7 +10,7 @@ const submit = document.getElementById("submit");
 // });
 
 
-input1.addEventListener("input", () => {
+submit.addEventListener("click", () => {
   const valuus = input1.value;
   demo.innerText = (valuus < 18 ? "Minor" : "Adult");
 });
