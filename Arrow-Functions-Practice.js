@@ -12,7 +12,7 @@ const submit = document.getElementById("submit");
 
 input1.addEventListener("input", () => {
   const valuus = input1.value;
-  demo.innerText = valuus;
+  demo.innerText = (valuus < 18 ? "Minor" : "Adult");
 });
 
 
