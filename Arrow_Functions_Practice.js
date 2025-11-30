@@ -15,6 +15,9 @@ submit.addEventListener("click", () => {
   demo.innerText = (valuus < 18 ? "Minor" : "Adult");
 });
 
+function click(){
+  
+}
 
 // const bone = (name) => {
 //   return name;
