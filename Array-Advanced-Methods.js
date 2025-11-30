@@ -8,7 +8,7 @@ const demo1 = document.getElementById("demo1");
 const demo2 = document.getElementById("demo2");
 const demo3 = document.getElementById("demo3");
 const demo4 = document.getElementById("demo4");
-const demo5 = document.getElementById("demo4");
+const demo5 = document.getElementById("demo5");
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 ``;
@@ -16,15 +16,12 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 demo1.innerText = `Original Numbers: ${numbers}`;
 
 // Use filter() to get the even numbers
-const evenNumbers = numbers.filter((number) => (number % 2 === 0));
+const evenNumbers = numbers.filter((number) => number % 2 === 0);
 demo2.innerText = `Even Numbers: ${evenNumbers}`;
 
 // Use reduce() to get the sum of all numbers
-const sumOfNumbers = numbers.reduce(
-  (first, last) => first + last,
-  0
-);
-demo3.innerText = `Sum of all numbers:, ${sumOfNumbers}`;
+const sumOfNumbers = numbers.reduce((first, last) => first + last);
+demo3.innerText = `Sum of All numbers: ${sumOfNumbers}`;
 
 // Use map() to get a new array with each number multiplied by 2
 const numbersMultipliedByTwo = numbers.map((number) => number * 2);
