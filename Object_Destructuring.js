@@ -13,19 +13,21 @@ click.addEventListener("click", () => {
   const insert = inputBox.value;
 
   click.disabled = true;
-  click.innerText = "Loading.....";
+  click.innerText = "loading...";
 
-  const person = people.find(p => p.id == insert);
+  const person = people.find((e) => e.id == insert);
 
   setTimeout(() => {
     if (person) {
-      const { name, age } = person;
-      spot2.innerText = name;
-      spot3.innerText = age;
+      spot1.innerText = person.name;
+      spot2.innerText = person.age;
+      spot3.innerText = person.id;
     } else {
-      spot1.innerText = "Not Found";
+      spot1.innerText = "not found";
+      spot2.innerText = "";
     }
+
     click.disabled = false;
-    click.innerText = "Submit";
-  }, 1000);
+    click.innerText = "click";
+  }, 3000);
 });
