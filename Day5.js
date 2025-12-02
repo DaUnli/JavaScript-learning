@@ -1,16 +1,7 @@
-const setup = document.getElementById("jokeSetup");
-const punchline = document.getElementById("jokePunchline");
-const button = document.getElementById("getJoke");
+// Practice Fetch API
 
-button.addEventListener("click", () => {
-  fetch("https://official-joke-api.appspot.com/random_joke")
-    .then((res) => res.json())
-    .then((data) => {
-      setup.innerText = "🟦 " + data.setup;
-      punchline.innerText = "🟩 " + data.punchline;
-    })
-    .catch((err) => {
-      setup.innerText = "Error fetching joke 😭";
-      punchline.innerText = "";
-    });
-});
+function getPokemon() {
+  fetch()
+    .then((res) => console.log(res))
+    .catch((error) => console.log("error", error));
+}
