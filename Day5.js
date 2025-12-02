@@ -9,7 +9,7 @@ function getPokemon() {
     .then((data) => { 
       const result = data.find((e) => e.id === insert.value);
       if (result) {
-        list.innerText = `${result.name}, ${result.age}, ${result.city}, ${result.money}`
+        list.innerText = `${result.name}, ${result.age}, ${result.city},  ${result.money}`
       } else {
         list.innerText = "not on the list";
       }
