@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BDO ATM Simulator</title>
+<style>
+body {
+  margin: 0;
+  background: #0a2342;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.atm {
+  width: 380px;
+  background: #091e39;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.7);
+  color: white;
+  text-align: center;
+}
+.screen {
+  background: #0f3c74;
+  border-radius: 12px;
+  padding: 18px;
+  min-height: 280px;
+  box-shadow: inset 0 0 20px rgba(0,0,50,0.4);
+}
+
+/* Inputs */
+input {
+  padding: 10px;
+  width: 80%;
+  border-radius: 8px;
+  border: none;
+  font-size: 17px;
+  margin-top: 10px;
+}
+
+/* Buttons */
+button {
+  width: 45%;
+  padding: 12px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #ffc700;
+  font-weight: bold;
+}
+button:hover {
+  background: #ffdd3b;
+}
+.full {
+  width: 90%;
+}
+
+/* Hidden */
+.hidden {
+  display: none;
+}
+
+/* Receipt */
+.receipt {
+  background: white;
+  color: black;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* BDO Logo */
+.logo {
+  font-size: 30px;
+  color: #ffc700;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* History List */
+.history-box {
+  background: white;
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  text-align: left;
+}
+.history-item {
+  border-bottom: 1px solid #ccc;
+  padding: 5px 0;
+}
+</style>
+</head>
+<body>
+
+<div class="atm">
+  <div class="logo">BDO</div>
+
+  <div class="screen">
+
+    <!-- INSERT CARD -->
+    <div id="insertCardView">
+      <h3>Please Insert Card</h3>
+      <button class="full" onclick="insertCard()">▶ Insert Card</button>
+    </div>
+
+    <!-- PIN -->
+    <div id="pinView" class="hidden">
+      <h3>Enter PIN</h3>
+      <input type="password" id="pinInput">
+      <button class="full" onclick="checkPIN()">ENTER</button>
+    </div>
+
+    <!-- MENU -->
+    <div id="menuView" class="hidden">
+      <h3>Main Menu</h3>
+      <button onclick="showBalance()">Balance</button>
+      <button onclick="showWithdraw()">Withdraw</button>
+      <button onclick="showDeposit()">Deposit</button>
+      <button onclick="fastCash()">Fast Cash</button>
+      <button onclick="showHistory()">History</button>
+      <button onclick="exitATM()" style="background:#d9534f;">Exit</button>
+    </div>
+
+    <!-- WITHDRAW -->
+    <div id="withdrawView" class="hidden">
+      <h3>Enter Amount</h3>
+      <input id="withdrawAmt" type="number">
+      <button class="full" onclick="doWithdraw()">Withdraw</button>
+      <button onclick="backMenu()">Back</button>
+    </div>
+
+    <!-- DEPOSIT -->
+    <div id="depositView" class="hidden">
+      <h3>Deposit Amount</h3>
+      <input id="depositAmt" type="number">
+      <button class="full" onclick="doDeposit()">Deposit</button>
+      <button onclick="backMenu()">Back</button>
+    </div>
+
+    <!-- FAST CASH -->
+    <div id="fastCashView" class="hidden">
+      <h3>Fast Cash</h3>
+      <button onclick="quickWithdraw(200)">₱200</button>
+      <button onclick="quickWithdraw(500)">₱500</button>
+      <button onclick="quickWithdraw(1000)">₱1,000</button>
+      <button onclick="quickWithdraw(2000)">₱2,000</button>
+      <button onclick="quickWithdraw(5000)">₱5,000</button>
+      <button onclick="backMenu()">Back</button>
+    </div>
+
+    <!-- BALANCE -->
+    <div id="balanceView" class="hidden">
+      <h3>Balance</h3>
+      <h2 id="balanceText">₱0.00</h2>
+      <button onclick="backMenu()" class="full">Back</button>
+    </div>
+
+    <!-- RECEIPT -->
+    <div id="receiptView" class="hidden">
+      <h3>Receipt</h3>
+      <div class="receipt" id="receiptText"></div>
+      <button class="full" onclick="backMenu()">Back</button>
+    </div>
+
+    <!-- TRANSACTION HISTORY -->
+    <div id="historyView" class="hidden">
+      <h3>Transaction History</h3>
+      <div class="history-box" id="historyList"></div>
+      <button class="full" onclick="backMenu()">Back</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let balance = 5000;
+const correctPIN = "1234";
+let history = []; // stores transactions
+
+function hideAll() {
+  document.querySelectorAll(".screen > div").forEach(v => v.classList.add("hidden"));
+}
+
+function insertCard() {
+  hideAll();
+  pinView.classList.remove("hidden");
+}
+
+function checkPIN() {
+  if (pinInput.value === correctPIN) {
+    hideAll();
+    menuView.classList.remove("hidden");
+  } else {
+    alert("Incorrect PIN");
+  }
+}
+
+function record(type, amount) {
+  history.push({
+    type,
+    amount,
+    date: new Date().toLocaleString()
+  });
+}
+
+function showBalance() {
+  hideAll();
+  balanceText.textContent = "₱" + balance.toLocaleString();
+  balanceView.classList.remove("hidden");
+  record("Balance Inquiry", 0);
+}
+
+function showWithdraw() {
+  hideAll();
+  withdrawView.classList.remove("hidden");
+}
+
+function doWithdraw() {
+  let amt = Number(withdrawAmt.value);
+  if (amt <= 0) return alert("Enter valid amount");
+  if (amt > balance) return alert("Insufficient funds");
+
+  balance -= amt;
+  record("Withdraw", amt);
+  printReceipt("Withdraw", amt);
+}
+
+function showDeposit() {
+  hideAll();
+  depositView.classList.remove("hidden");
+}
+
+function doDeposit() {
+  let amt = Number(depositAmt.value);
+  if (amt <= 0) return alert("Enter valid amount");
+
+  balance += amt;
+  record("Deposit", amt);
+  printReceipt("Deposit", amt);
+}
+
+function fastCash() {
+  hideAll();
+  fastCashView.classList.remove("hidden");
+}
+
+function quickWithdraw(amt) {
+  if (amt > balance) return alert("Insufficient funds");
+
+  balance -= amt;
+  record("Fast Cash", amt);
+  printReceipt("Fast Cash", amt);
+}
+
+function printReceipt(type, amount) {
+  hideAll();
+  receiptView.classList.remove("hidden");
+  receiptText.innerHTML = `
+    <strong>BDO ATM RECEIPT</strong><br>
+    Transaction: ${type}<br>
+    Amount: ₱${amount.toLocaleString()}<br>
+    Remaining Balance: ₱${balance.toLocaleString()}<br>
+    Time: ${new Date().toLocaleString()}
+  `;
+}
+
+function showHistory() {
+  hideAll();
+  historyView.classList.remove("hidden");
+
+  historyList.innerHTML = history.length === 0 
+    ? "<i>No transaction history yet.</i>"
+    : history.map(h => `
+      <div class="history-item">
+        <strong>${h.type}</strong><br>
+        Amount: ₱${h.amount.toLocaleString()}<br>
+        Date: ${h.date}
+      </div>
+    `).join("");
+}
+
+function exitATM() {
+  hideAll();
+  insertCardView.classList.remove("hidden");
+}
+
+function backMenu() {
+  hideAll();
+  menuView.classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>

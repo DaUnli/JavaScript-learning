@@ -25,9 +25,10 @@ click.addEventListener("click", () => {
     } else {
       spot1.innerText = "not found";
       spot2.innerText = "";
+      spot3.innerText = "";
     }
 
     click.disabled = false;
     click.innerText = "click";
-  }, 3000);
+  }, 1000);
 });
