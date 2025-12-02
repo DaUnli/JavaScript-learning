@@ -1,5 +1,17 @@
-{
-  "name": "Gilmier",
-  "age": 19,
-  "city": "Philippines"
-}
+[
+  {
+    "id": "1234",
+    "name": "Gilmier",
+    "age": 19,
+    "city": "Philippines",
+    "money": ""
+    
+  },
+  {
+    "id": "9876",
+    "name": "Ashley",
+    "age": 20,
+    "city": "Dubai",
+    "money": ""
+  }
+]
