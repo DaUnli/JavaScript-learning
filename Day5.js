@@ -1,7 +1,8 @@
 // Practice Fetch API
 
 function getPokemon() {
-  fetch()
-    .then((res) => console.log(res))
-    .catch((error) => console.log("error", error));
+  fetch("config.json")
+    .then((res) => res.json())
+    .then((data) => console.log(data.name))
+    .catch((error) => console.log(error));
 }
