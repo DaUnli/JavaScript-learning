@@ -4,7 +4,7 @@ const list = document.getElementById("pokemon");
 const insert = document.getElementById("input1");
 
 function getPokemon() {
-  fetch("config.json")
+  fetch("files.json")
     .then((res) => res.json())
     .then((data) => { 
       const result = data.find((e) => e.id === insert.value);
