@@ -1,3 +1,5 @@
+// Spread_Operator
+
 const insert1 = document.getElementById("merge1");
 const insert2 = document.getElementById("merge2");
 const insert3 = document.getElementById("merge3");

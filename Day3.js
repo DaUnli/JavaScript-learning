@@ -1,3 +1,6 @@
+// Object_Destructuring
+
+
 const spot1 = document.getElementById("spot1");
 const spot2 = document.getElementById("spot2");
 const spot3 = document.getElementById("spot3");
