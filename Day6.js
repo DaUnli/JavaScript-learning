@@ -1,26 +1,27 @@
 // Async/Await + Arrow Function + Error Handling
 
-const loadFile = async () => {
+const insert = document.getElementById("input1");
+const demo = document.getElementById("demo");
+const images = document.getElementById("images");
+
+const Pokemon = async () => {
   try {
-    const inputvalue = document.getElementById("input1").value;
-    const images = document.getElementById("images");
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${inputvalue}`
+    const res = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${insert.value}`
     );
 
-    if (!response.ok) {
-      throw new Error("Failed to load JSON: " + response.status);
+    if (!res.ok) {
+      throw new Error("Not Found this: " + error.message);
     }
 
-    const data = await response.json();
-    document.getElementById("demo").innerHTML = data.name;
+    const data = await res.json();
+    demo.innerText = data.age;
+    console.log(data.abilities)
 
-    const imagesOf = data.sprites.front_default;
-
-    images.src = imagesOf;
+    images.src = data.sprites.front_default;
     images.style.display = "block";
+    images.style.justifyContent = "center";
   } catch (error) {
-    document.getElementById("demo").innerHTML = "Error: " + error.message;
+    demo.innerText = "Error " + error.message;
   }
 };
-
