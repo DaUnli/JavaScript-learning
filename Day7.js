@@ -1,3 +1,5 @@
+// DOM Manipulation
+ 
 // Function to generate random color
 const randomColor = () => {
   const r = Math.floor(Math.random() * 256);
