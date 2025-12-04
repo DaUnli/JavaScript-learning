@@ -26,7 +26,7 @@ const sumOfNumbers = evenNumbers.reduce((first, last) => first + last);
 demo3.innerText = `Sum of All numbers: ${sumOfNumbers}`;
 
 // Use map() to get a new array with each number multiplied by 2
-const numbersMultipliedByTwo = evenNumbers.map((number) => number * 2);
+const numbersMultipliedByTwo = evenNumbers.map((number) => number);
 demo4.innerText = `Numbers multiplied by 2: ${numbersMultipliedByTwo}`;
 
 // --- Bonus: find() ---
