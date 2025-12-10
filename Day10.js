@@ -1,17 +1,11 @@
-const SaveName = () => {
-  const savedName = localStorage.getItem("uername");
-  if (savedName) {
-    document.getElementById("display").innerText =
-      "Saved Username: " + savedName;
-    document.getElementById("username").value = savedName;
-  }
-};
+const nput = document.getElementById("username");
+const btn = document.getElementById("saveBtn");
+const display = document.getElementById("display");
 
-window.onload = SaveName();
+btn.addEventListener("click", () => {
+  const input = nput.value;
 
-// 2. Save username when clicking the button
-document.getElementById("saveBtn").addEventListener("click", () => {
-  const name = document.getElementById("username").value;
-  localStorage.setItem("username", name);
-  document.getElementById("display").innerText = "Saved Username: " + name;
+  localStorage.setItem("name", input);
+
+  display.innerHTML = localStorage.getItem("name");
 });
