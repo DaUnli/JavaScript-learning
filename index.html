@@ -125,12 +125,25 @@
     </div> -->
 
     <!-- Modules (import/export) -->
-    <div>
+    <!-- <div>
       <script type="module" src="Day13.js"></script>
-    </div>
+    </div> -->
 
+    <!-- Simple Frontend Login (local Storage -->
     <div>
-      <script src=""></script>
+      <div class="box" id="loginBox">
+        <h3>Login</h3>
+        <input type="text" id="username" placeholder="Username" />
+        <input type="password" id="password" placeholder="Password" />
+        <button onclick="login()">Login</button>
+        <p id="error" style="color: red"></p>
+      </div>
+
+      <div class="box" id="welcomeBox" style="display: none">
+        <h3 id="welcome"></h3>
+        <button onclick="logout()">Logout</button>
+      </div>
+      <script src="Day14.js"></script>
     </div>
     <div>
       <script src=""></script>
