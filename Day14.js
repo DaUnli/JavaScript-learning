@@ -2,7 +2,7 @@ const USER = "admin";
 const PASS = "1234";
 
 // Check login on page load
-if (localStorage.getItem("loggedIn") === "true") {
+if (localStorage.getItem("loggedIn" === "true")) {
   showWelcome();
 }
 
@@ -14,6 +14,7 @@ function login() {
   if (username === USER && password === PASS) {
     localStorage.setItem("loggedIn", "true");
     localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
     showWelcome();
   } else {
     error.textContent = "Invalid username or password";
